@@ -1,7 +1,7 @@
 package com.example.androiddrugbugtests
 
 import android.app.Application
-import com.example.androiddrugbugtests.repository.InteractionsRespository
+import com.example.androiddrugbugtests.repository.InteractionsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +19,5 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideInteractionsRepository() = InteractionsRespository()
+    fun provideInteractionsRepository() = InteractionsRepository()
 }
