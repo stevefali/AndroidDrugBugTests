@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -16,6 +18,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.androiddrugbugtests.ui.InteractionCard
 import com.example.androiddrugbugtests.ui.theme.AndroidDrugBugTestsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +33,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AndroidDrugBugTestsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 8.dp)
+                ) { innerPadding ->
                     val interactions by viewModel.interactionsResponse.collectAsState()
                     Column {
                         Greeting(
@@ -45,6 +53,13 @@ class MainActivity : ComponentActivity() {
                         }
                         interactions?.interactionsResponse?.get(0)?.let {
                             Text(text = it.medicine)
+                        }
+                        LazyColumn {
+                            interactions?.let {
+                                items(it.interactionsResponse) { interaction ->
+                                    InteractionCard(interaction)
+                                }
+                            }
                         }
                     }
 
