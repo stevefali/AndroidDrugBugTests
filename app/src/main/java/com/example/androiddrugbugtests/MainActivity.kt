@@ -39,20 +39,12 @@ class MainActivity : ComponentActivity() {
                         .padding(horizontal = 8.dp)
                 ) { innerPadding ->
                     val interactions by viewModel.interactionsResponse.collectAsState()
-                    Column {
-                        Greeting(
-                            name = "Android",
-                            modifier = Modifier
-                                .padding(innerPadding)
-                        )
+                    Column(modifier = Modifier.padding(innerPadding)) {
                         Button(onClick = { viewModel.getInteractions("grapefruit") }) {
                             Text(text = "Get Interactions")
                         }
                         if (viewModel.isResultLoading.value) {
                             Text(text = "Loading...")
-                        }
-                        interactions?.interactionsResponse?.get(0)?.let {
-                            Text(text = it.medicine)
                         }
                         LazyColumn {
                             interactions?.let {
@@ -67,21 +59,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndroidDrugBugTestsTheme {
-        Greeting("Android")
-    }
-
 }
