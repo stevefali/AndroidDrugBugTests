@@ -58,14 +58,14 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("")
                     }
                     Column(modifier = Modifier.padding(innerPadding)) {
-                        
+
                         SearchBar(
                             query = interactor,
                             onQueryChange = { interactor = it },
                             onSearch = { searchinteractions(interactor) },
                             active = false,
                             onActiveChange = {},
-                            placeholder = { Text(text = "Enter a food, drink or drug")},
+                            placeholder = { Text(text = "Enter a food, drink or drug") },
                             leadingIcon = {
                                 IconButton(onClick = { searchinteractions(interactor) }) {
                                     Icon(
@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
                                         contentDescription = "Search",
                                         modifier = Modifier,
                                         Color(
-                                            0xFF4CAF50
+                                            0xff56cc9d
                                         )
                                     )
                                 }
@@ -90,6 +90,12 @@ class MainActivity : ComponentActivity() {
                                     InteractionCard(interaction)
                                 }
                             }
+                        }
+                        interactions?.let {
+                            Text(
+                                text = it.disclaimer,
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
                         }
                     }
 
